@@ -20,17 +20,23 @@ struct A
 {
     struct visitor {
         virtual ~visitor() = default ;
-        virtual bool accept( A* ) { return false ; } };
+        virtual bool accept( A* ) { return false ; }
+        
+    };
+    
     virtual ~A() = default ;
+    
     virtual bool accept( visitor& ) = 0 ;
+    
     bool accept( visitor&& v ) // rvalue
-    { return accept(v) ; }
+            { return accept( v ) ; }
 };
 
 template < typename BASE > struct base : BASE
 {
     struct visitor { virtual ~visitor() = default ;
         virtual bool accept( base* ) = 0 ; };
+    
     virtual bool accept( A::visitor& av ) override
     {
         auto dv = dynamic_cast< base::visitor* >( std::addressof(av) ) ;
@@ -44,7 +50,8 @@ struct D : base<B> {};
 struct E : base<C> {};
 struct F : base<D> {};
 
-template < typename T > struct counting_visitor : A::visitor
+template < typename T >
+struct counting_visitor : A::visitor
 {
     virtual bool accept( A* p ) { return dynamic_cast< T* >(p) ? ++cnt : false ; }
     operator int () const { return cnt ; }

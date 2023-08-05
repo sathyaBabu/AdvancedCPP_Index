@@ -56,6 +56,13 @@ struct CallPrintName {
     void operator()(const ExtraDerived& ed) { ed.PrintName(); }
 };
 
+// error
+//template<class T>
+//struct CallPrintName {
+//    void operator()(const T& d) { d.PrintName(); }
+//
+//};
+
 
 ///
 /////////////
