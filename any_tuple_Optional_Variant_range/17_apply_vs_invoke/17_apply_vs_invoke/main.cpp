@@ -13,9 +13,15 @@
 
  Using std::apply, we create a tuple args containing the arguments (10, 20). We then pass this tuple to std::apply, along with the function printSum. std::apply expands the tuple and passes its elements as separate arguments to the function, resulting in a call to printSum(10, 20).
 
- Using std::invoke, we create an instance of Foo and invoke its member function printProduct using the address-of operator &. We pass the instance foo as the first argument, followed by the remaining arguments (2.5, 3.5). std::invoke internally handles the member function invocation, resulting in a call to foo.printProduct(2.5, 3.5).
+ Using std::invoke, we create an instance of Foo and invoke its member function printProduct using the address-of operator &. We pass the instance foo as the first argument, followed by the remaining arguments (2.5, 3.5).
+     std::invoke internally handles the member function invocation, resulting in a call to foo.printProduct(2.5, 3.5).
 
- Both std::apply and std::invoke are useful for invoking callable objects with arguments, but std::apply is specifically designed to work with tuples and unpack their elements as arguments, while std::invoke can handle different types of callable objects and member functions.
+ Both std::apply and std::invoke are useful for invoking callable objects with arguments, but
+ 
+ 
+       std::apply is specifically designed to work with tuples and unpack their elements as arguments, while
+ 
+       std::invoke can handle different types of callable objects and member functions.
  
  */
 void printSum(int a, int b) {
